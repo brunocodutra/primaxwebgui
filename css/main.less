@@ -1,0 +1,82 @@
+html {
+    height: 100%;
+}
+
+/* Sticky Footer + Responsive
+ * --------------------------
+ */
+
+@footer-height: 40px;  
+@footer-height-large: 40px;        /* Larger width -> less height */
+@footer-height-tablet: 40px;       /* Smaller -> more height needed */
+
+body {
+  position: absolute;
+  height: auto;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin-top: 60px;
+  margin-bottom: @footer-height;
+}
+
+#content {
+     min-height: 100%;
+     height: auto !important;
+     height: 100%;
+     margin: 0 auto -@footer-height;
+} 
+
+footer, .footer-push { 
+     height: @footer-height;
+}  
+
+/* LANDSCAPE PHONE TO SMALL DESKTOP & PORTRAIT TABLET
+ * --------------------------------------------------
+ */
+
+@media (max-width: 767px) {
+	#content {
+		min-height: 0;
+		height: auto;
+		margin: 0 auto;
+	} 
+
+    footer, .footer-push { 
+        height: auto; 
+        margin: 0 -20px; 
+        .container {
+            padding: 0 20px;
+        }
+    }
+
+}
+
+/* PORTRAIT TABLET TO DEFAULT DESKTOP
+ * ----------------------------------
+ */
+
+@media (min-width: 768px) and (max-width: 979px) {
+    #content {
+        margin: 0 auto -@footer-height-tablet;
+    } 
+    
+    footer, .footer-push { 
+        height: @footer-height-tablet;
+    }  
+}
+
+/* LARGE DESKTOP & UP
+ * ------------------
+ */
+
+@media (min-width: 1200px) {
+    #content {
+        margin: 0 auto -@footer-height-large;
+    } 
+    
+    footer, .footer-push { 
+        height: @footer-height-large;
+    }
+}
