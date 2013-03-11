@@ -29,44 +29,25 @@
 
         <div id="content">
             <div class="container">
-    
-                <!-- Main hero unit for a primary marketing message or call to action -->
-                <div class="hero-unit">
-                    <h1>Hello, world!</h1>
-                    <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-                    <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-                </div>
-    
-                <!-- Example row of columns -->
+
                 <div class="row">
-                    <div class="span4">
-                        <h2>Heading</h2>
-                        <p>
-                            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-                        </p>
-                        <p>
-                            <a class="btn" href="#">View details &raquo;</a>
-                        </p>
-                    </div>
-                    <div class="span4">
-                        <h2>Heading</h2>
-                        <p>
-                            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-                        </p>
-                        <p>
-                            <a class="btn" href="#">View details &raquo;</a>
-                        </p>
-                    </div>
-                    <div class="span4">
-                        <h2>Heading</h2>
-                        <p>
-                            Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-                        </p>
-                        <p>
-                            <a class="btn" href="#">View details &raquo;</a>
-                        </p>
+                    <button id="buttonOnOff" class="span3 btn btn-danger btn-large" type="button">Off</button>
+                    <div class="span9"></div>
+                </div>
+                
+                <div class="row">
+                    <div class="span12">
+                        <p>PictureBox</p>
                     </div>
                 </div>
+                
+                <div class="row">
+                    <button id="preview" class="span3 btn btn-large control disabled" type="button">Preview</button>
+                    <button id="scan" class="span3 btn btn-large control disabled" type="button">Scan</button>
+                    <div class="span3"></div>
+                    <button id="save" class="span3 btn btn-inverse btn-large control disabled" type="button">Save Image</button>
+                </div>
+                
             </div>
             <div class="footer-push"></div>
         </div>
@@ -79,5 +60,43 @@
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.2.min.js"><\/script>')</script>
         <script src="js/vendor/bootstrap.min.js"></script>
         <script src="js/main.js"></script>
+        <script type="text/javascript">
+        
+            function enableControls(flag) {
+                if(flag)
+                    $('.control').removeClass('disabled');
+                else
+                    $('.control').addClass('disabled');                    
+            }
+            
+            function turnOn(event) {
+                self = this;
+                $(self).unbind('click');
+                $(self).removeClass('btn-danger').addClass('btn-warning').addClass('disabled');
+                $(self).text('Turning On...');
+                countdown(self, 10, function() {
+                    $(self).removeClass('btn-warning').removeClass('disabled').addClass('btn-success');
+                    $(self).text('On');
+                    $(self).click(turnOff);
+                    enableControls(true);
+                });
+            }
+            
+            function turnOff(event) {
+                self = this;
+                enableControls(false);
+                $(self).unbind('click');
+                $(self).removeClass('btn-success').addClass('btn-warning').addClass('disabled');
+                $(self).text('Turning Off...');
+                countdown(self, 10, function() {
+                    $(self).removeClass('btn-warning').removeClass('disabled').addClass('btn-danger');
+                    $(self).text('Off');
+                    $(self).click(turnOn);
+                });
+            }
+        
+            $("#buttonOnOff").click(turnOn);
+            
+        </script>
     </body>
 </html>
