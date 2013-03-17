@@ -10,26 +10,59 @@ html {
 @footer-height-large: 40px;        /* Larger width -> less height */
 @footer-height-tablet: 40px;       /* Smaller -> more height needed */
 
+@controller-height: 39px;  
+@controller-height-large: 39px;        /* Larger width -> less height */
+@controller-height-tablet: 39px;       /* Smaller -> more height needed */
+
 body {
-  position: absolute;
-  height: auto;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  margin-top: 60px;
-  margin-bottom: @footer-height;
+    position: absolute;
+    min-height: 320px;
+    height: auto;
+    min-width: 480px;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin-top: 60px;
+    margin-bottom: @footer-height;
 }
 
 #content {
-     min-height: 100%;
-     height: auto !important;
-     height: 100%;
-     margin: 0 auto -@footer-height;
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -@footer-height;
+} 
+
+#top-controller {
+    position: absolute;
+    height: @controller-height;
+    top: 0;
+} 
+
+#frame {
+    position: absolute;
+    height: auto;
+    bottom: 0;
+    top: 0;
+    margin-top: @controller-height + 10px;
+    margin-bottom: @controller-height + @footer-height + 10px;
+}
+
+#image {
+    height: 100%;
+    background-color: #cccccc
+}
+
+#bottom-controller {
+    position: absolute;
+    height: @controller-height;
+    bottom: 0;
+    margin-bottom: @footer-height;
 } 
 
 footer, .footer-push { 
-     height: @footer-height;
+    height: @footer-height;
 }  
 
 /* LANDSCAPE PHONE TO SMALL DESKTOP & PORTRAIT TABLET

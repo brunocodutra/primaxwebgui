@@ -30,24 +30,22 @@
         <div id="content">
             <div class="container">
 
-                <div class="row">
+                <div id="top-controller" class="row">
                     <button id="buttonOnOff" class="span3 btn btn-danger btn-large" type="button">Off</button>
                     <div class="span9"></div>
                 </div>
                 
-                <div class="row">
-                    <div class="span12">
-                        <p>PictureBox</p>
-                    </div>
+                <div id="frame" class="row">
+                    <img id="image" class="span12"></img>
                 </div>
                 
-                <div class="row">
+                <div id="bottom-controller" class="row">
                     <button id="preview" class="span3 btn btn-large control disabled" type="button">Preview</button>
                     <button id="scan" class="span3 btn btn-large control disabled" type="button">Scan</button>
                     <div class="span3"></div>
                     <button id="save" class="span3 btn btn-inverse btn-large control disabled" type="button">Save Image</button>
                 </div>
-                
+            
             </div>
             <div class="footer-push"></div>
         </div>
