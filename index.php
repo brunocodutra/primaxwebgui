@@ -31,12 +31,14 @@
             <div class="container">
 
                 <div id="top-controller" class="row">
-                    <button id="buttonOnOff" class="span3 btn btn-danger btn-large" type="button">Off</button>
+                    <button id="buttonOnOff" class="span3 btn btn-large btn-danger" type="button">Off</button>
                     <div class="span9"></div>
                 </div>
                 
-                <div id="frame" class="row">
-                    <img id="image" class="span12"></img>
+                <div class="row">
+                    <div id="frame" class="span12">
+                        <img id="image"></img>
+                    </div>
                 </div>
                 
                 <div id="bottom-controller" class="row">
@@ -73,7 +75,7 @@
                 $(element).click(turnOff);
             }
             
-            function turnOn(event) {
+            function turnOn() {
                 self = this;
                 $(self).unbind('click');
                 $(self).removeClass('btn-danger').addClass('btn-warning').addClass('disabled');
@@ -94,7 +96,7 @@
                 $(element).click(turnOn);
             }
             
-            function turnOff(event) {
+            function turnOff() {
                 self = this;
                 enableControls(false);
                 $(self).unbind('click');
@@ -110,8 +112,21 @@
                     }
                 });
             }
-        
+            
+            function centerElement(element, parent) {
+                $(element).css('margin-left', ($(parent).outerWidth() - $(element).width())/2);
+            }
+            
+            function preview() {
+                $("#image").hide();
+                $("#image").css('margin-left', '0');
+                $("#image").one('load', function() {centerElement($("#image"), $("#frame")); $("#image").show();});
+                $("#image").attr('src', 'php/primax.php?op=scan&resolution=20');
+            }
+            
+            $(window).resize(function() {centerElement($("#image"), $("#frame"));});
             $("#buttonOnOff").click(turnOn);
+            $("#preview").click(preview);
             
         </script>
     </body>
