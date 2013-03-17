@@ -69,17 +69,31 @@
                     $('.control').addClass('disabled');                    
             }
             
+            function setOn(element) {
+                $(element).removeClass('btn-danger').removeClass('btn-warning').removeClass('disabled').addClass('btn-success');
+                $(element).text('On');
+                $(element).click(turnOff);
+            }
+            
             function turnOn(event) {
                 self = this;
                 $(self).unbind('click');
                 $(self).removeClass('btn-danger').addClass('btn-warning').addClass('disabled');
                 $(self).text('Turning On...');
-                countdown(self, 10, function() {
-                    $(self).removeClass('btn-warning').removeClass('disabled').addClass('btn-success');
-                    $(self).text('On');
-                    $(self).click(turnOff);
-                    enableControls(true);
+                
+                $.get('php/primax.php?op=turnLampOn', function(data) {
+                    if(data >= 0) {
+                        countdown(self, data, function() {setOn(self); enableControls(true);});
+                    } else {
+                        setOff(self);
+                    }
                 });
+            }
+            
+            function setOff(element) {
+                $(element).removeClass('btn-success').removeClass('btn-warning').removeClass('disabled').addClass('btn-danger');
+                $(element).text('Off');
+                $(element).click(turnOn);
             }
             
             function turnOff(event) {
@@ -88,10 +102,14 @@
                 $(self).unbind('click');
                 $(self).removeClass('btn-success').addClass('btn-warning').addClass('disabled');
                 $(self).text('Turning Off...');
-                countdown(self, 10, function() {
-                    $(self).removeClass('btn-warning').removeClass('disabled').addClass('btn-danger');
-                    $(self).text('Off');
-                    $(self).click(turnOn);
+                                
+                $.get('php/primax.php?op=turnLampOff', function(data) {
+                    if(data >= 0) {
+                        countdown(self, data, function() {setOff(self);});
+                    } else {
+                        setOn(self);
+                        enableControls(true);
+                    }
                 });
             }
         
