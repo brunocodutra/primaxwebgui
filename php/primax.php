@@ -3,22 +3,16 @@
     
     function tiff2png($tifFile) 
     {
-        $magickWand = NewMagickWand();
-        MagickReadImage($magickWand, $tifFile);
-
-        if(MagickGetImageColorspace($magickWand) == MW_CMYKColorspace) 
-            MagickSetImageColorspace($magickWand, MW_RGBColorspace);
-
-        MagickSetImageFormat($magickWand, 'PNG' );
         $pngFile = str_replace('.tif', '.png', $tifFile);
-        MagickWriteImage($magickWand, $pngFile);
+        exec("convert ".$tifFile." ".$pngFile);
         
         return $pngFile;
     }
 
     function turnLampOn($port)
     {
-        exec("primaxscan --port='".$port."' --lamp=on", $output, $return);
+        //exec("primaxscan --port='".$port."' --lamp=on", $output, $return);
+        $return = 0;
         if($return)
             return -1;
 
@@ -28,7 +22,8 @@
     
     function turnLampOff($port)
     {
-        exec("primaxscan --port='".$port."' --lamp=off", $output, $return);
+        //exec("primaxscan --port='".$port."' --lamp=off", $output, $return);
+        $return = 0;
         if($return)
             return -1;
         
@@ -38,6 +33,21 @@
         
     function scan($port, $resolution, $x, $y, $dx, $dy, $speed, $contrast, $brightness, $gamma)
     {
+        global $minResolution;
+        global $maxResolution;
+        global $minX;
+        global $maxX;
+        global $minY;
+        global $maxY;
+        global $minSpeed;
+        global $maxSpeed;
+        global $minContrast;
+        global $maxContrast;
+        global $minBrightness;
+        global $maxBrightness;
+        global $minGamma;
+        global $maxGamma;
+        
         $resolution = min(max($resolution, $minResolution), $maxResolution);
         $x = min(max($x, $minX), $maxX);
         $y = min(max($y, $minY), $maxY);
@@ -47,9 +57,9 @@
         $contrast = min(max($contrast, $minContrast), $maxContrast);
         $brightness = min(max($brightness, $minBrightness), $maxBrightness);
         $gamma = min(max($gamma, $minGamma), $maxGamma);
-        $tifFile = '/tmp/primaxscan.tif';
+        $tifFile = '../tmp/primaxscan.tif';
         
-        exec("primaxscan 
+        /*exec("primaxscan 
             --port='".$port."' 
             --speed=".$speed." 
             --Scanner=".$maxResolution." 
@@ -61,8 +71,9 @@
             -p".$x."x".$y." 
             -d".$dx."x".$dy." 
             -r ".$resolution." 
-            -f ".$tifFile, $output, $return);
-            
+            -f ".$tifFile, $output, $return);*/
+        $return = 0;
+        
         if($return || !file_exists($tifFile))
             $pngFile = '../img/broken_image.png';
         else

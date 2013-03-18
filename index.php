@@ -24,7 +24,7 @@
         <![endif]-->
 
         <?php
-            require($DOCUMENT_ROOT."navbar.php");
+            require("navbar.php");
         ?>
 
         <div id="content">
@@ -42,10 +42,10 @@
                 </div>
                 
                 <div id="bottom-controller" class="row">
-                    <button id="preview" class="span3 btn btn-large control disabled" type="button">Preview</button>
-                    <button id="scan" class="span3 btn btn-large control disabled" type="button">Scan</button>
+                    <button id="preview" class="span3 btn btn-large  disabled" type="button">Preview</button>
+                    <button id="scan" class="span3 btn btn-large  disabled" type="button">Scan</button>
                     <div class="span3"></div>
-                    <button id="save" class="span3 btn btn-inverse btn-large control disabled" type="button">Save Image</button>
+                    <button id="save" class="span3 btn btn-inverse btn-large  disabled" type="button">Save Image</button>
                 </div>
             
             </div>
@@ -53,7 +53,7 @@
         </div>
         
         <?php
-            require($DOCUMENT_ROOT."footer.php");
+            require("footer.php");
         ?>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
@@ -63,10 +63,13 @@
         <script type="text/javascript">
         
             function enableControls(flag) {
-                if(flag)
-                    $('.control').removeClass('disabled');
-                else
-                    $('.control').addClass('disabled');                    
+                if(flag) {
+                    $("#preview").removeClass('disabled').click(preview);
+                    $("#scan").removeClass('disabled').click(function(){scan(200);});
+                } else {
+                    $("#preview").addClass('disabled').unbind('click');
+                    $("#scan").addClass('disabled').unbind('click');
+                }
             }
             
             function setOn(element) {
@@ -118,15 +121,18 @@
             }
             
             function preview() {
+                scan(20);
+            }
+            
+            function scan(resolution) {
                 $("#image").hide();
                 $("#image").css('margin-left', '0');
                 $("#image").one('load', function() {centerElement($("#image"), $("#frame")); $("#image").show();});
-                $("#image").attr('src', 'php/primax.php?op=scan&resolution=20');
+                $("#image").attr('src', 'php/primax.php?op=scan&resolution=' + resolution);
             }
             
             $(window).resize(function() {centerElement($("#image"), $("#frame"));});
             $("#buttonOnOff").click(turnOn);
-            $("#preview").click(preview);
             
         </script>
     </body>
