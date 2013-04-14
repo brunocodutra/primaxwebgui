@@ -6,10 +6,10 @@
     $maxResolution = 300;
     
     $minX = 0;
-    $maxX = 8.5;
+    $maxX = 8.4;
     
     $minY = 0;
-    $maxY = 11.7;   
+    $maxY = 11.6;   
     
     $minSpeed = 0;
     $maxSpeed = 15;

@@ -11,8 +11,7 @@
 
     function turnLampOn($port)
     {
-        //exec("primaxscan --port='".$port."' --lamp=on", $output, $return);
-        $return = 0;
+        exec("./primaxscan --port='".$port."' --lamp=on", $output, $return);
         if($return)
             return -1;
 
@@ -22,8 +21,7 @@
     
     function turnLampOff($port)
     {
-        //exec("primaxscan --port='".$port."' --lamp=off", $output, $return);
-        $return = 0;
+        exec("./primaxscan --port='".$port."' --lamp=off", $output, $return);
         if($return)
             return -1;
         
@@ -58,21 +56,12 @@
         $brightness = min(max($brightness, $minBrightness), $maxBrightness);
         $gamma = min(max($gamma, $minGamma), $maxGamma);
         $tifFile = '../tmp/primaxscan.tif';
+        $pngFile = '../tmp/primaxscan.png';
         
-        /*exec("primaxscan 
-            --port='".$port."' 
-            --speed=".$speed." 
-            --Scanner=".$maxResolution." 
-            --contrast=".$contrast." 
-            --brightness=".$brightness." 
-            --gamma=".$gamma." 
-            --Compression=none 
-            --RGB 
-            -p".$x."x".$y." 
-            -d".$dx."x".$dy." 
-            -r ".$resolution." 
-            -f ".$tifFile, $output, $return);*/
-        $return = 0;
+        unlink($tifFile);
+        unlink($pngFile);
+
+        exec("./primaxscan --port='".$port."' --speed=".$speed." --Scanner=".$maxResolution." --contrast=".$contrast." --brightness=".$brightness." --gamma=".$gamma." --Compression=none --RGB -p".$x."x".$y." -d".$dx."x".$dy." -r ".$resolution." -f ".$tifFile, $output, $return);
         
         if($return || !file_exists($tifFile))
             $pngFile = '../img/broken_image.png';

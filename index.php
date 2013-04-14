@@ -31,7 +31,7 @@
             <div class="container">
 
                 <div id="top-controller" class="row">
-                    <button id="buttonOnOff" class="span3 btn btn-large btn-danger" type="button">Off</button>
+                    <button id="buttonOnOff" class="span3 btn btn-danger btn-large" type="button"><i class="icon-off icon-white"></i> Off</button>
                     <div class="span9"></div>
                 </div>
                 
@@ -42,10 +42,10 @@
                 </div>
                 
                 <div id="bottom-controller" class="row">
-                    <button id="preview" class="span3 btn btn-large  disabled" type="button">Preview</button>
-                    <button id="scan" class="span3 btn btn-large  disabled" type="button">Scan</button>
+                    <button id="preview" class="span3 btn btn-large disabled" type="button"><i class="icon-search"></i> Preview</button>
+                    <button id="scan" class="span3 btn btn-large disabled" type="button"><i class="icon-hdd"></i> Scan</button>
                     <div class="span3"></div>
-                    <button id="save" class="span3 btn btn-inverse btn-large  disabled" type="button">Save Image</button>
+                    <button id="save" class="span3 btn btn-inverse btn-large disabled" type="button"><i class="icon-download icon-white"></i> Save Image</button>
                 </div>
             
             </div>
@@ -74,7 +74,7 @@
             
             function setOn(element) {
                 $(element).removeClass('btn-danger').removeClass('btn-warning').removeClass('disabled').addClass('btn-success');
-                $(element).text('On');
+                $(element).html('<i class="icon-off icon-white"></i> On');
                 $(element).click(turnOff);
             }
             
@@ -95,7 +95,7 @@
             
             function setOff(element) {
                 $(element).removeClass('btn-success').removeClass('btn-warning').removeClass('disabled').addClass('btn-danger');
-                $(element).text('Off');
+                $(element).html('<i class="icon-off icon-white"></i> Off');
                 $(element).click(turnOn);
             }
             
@@ -125,9 +125,24 @@
             }
             
             function scan(resolution) {
+                $("#buttonOnOff").addClass('disabled');
+                enableControls(false);
+                $("#save").addClass('disabled').unbind('click');
                 $("#image").hide();
                 $("#image").css('margin-left', '0');
-                $("#image").one('load', function() {centerElement($("#image"), $("#frame")); $("#image").show();});
+                $("#image").one('load', function() {
+                    $("#buttonOnOff").removeClass('disabled'); 
+                    enableControls(true); 
+                    $.get('php/downloadable.php', function(data) {
+                        if(data != 0) {
+                            $("#save").removeClass('disabled').click(function() {
+                                window.location='php/download.php';
+                            });
+                        }
+                    });
+                    centerElement($("#image"), $("#frame")); 
+                    $("#image").show();
+                });
                 $("#image").attr('src', 'php/primax.php?op=scan&resolution=' + resolution);
             }
             
