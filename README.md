@@ -8,8 +8,8 @@
 
 ### Runtime ###
 
-* Unix like operating systems (**tested under Archlinux x86_64 and Ubuntu Server 12.04 LTS x86_84**)
-* On the server side, **primaxwebgui** requires a working webserver with php support and the primax binaries installed (**tested under Apache 2.2 and php 5.4**). 
+* Unix like operating systems (tested under Archlinux x86_64 and Ubuntu Server 12.04 LTS x86_84)
+* On the server side, **primaxwebgui** requires a working webserver with php support and the primax binaries installed (tested under Apache 2.2 and php 5.4). 
 * On the client side, all is needed is a modern browser with javascrit support.
 
 ### Instalation ###
