@@ -1,3 +1,9 @@
+<!--
+  This file is part of primaxwebgui, a free software.
+  Use, modification and distribution is subject to the BSD 2-clause license.
+  See accompanying file LICENSE.txt for its full text.
+-->
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
