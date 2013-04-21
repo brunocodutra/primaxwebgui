@@ -18,8 +18,9 @@
 
 ## Instalation ##
 
-* Setup the web server to serve primaxwebgui/index.php
-* Run INSTALL.sh from within the primaxwebgui folder with root privileges
+* Run INSTALL.sh from within primaxwebgui/ with root privileges
+* Setup the web server to serve primaxwebgui/ as primax/
+* Check the setup by visiting http://yourdomain/primax
 
 ## License ##
 
