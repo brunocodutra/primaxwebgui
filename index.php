@@ -4,7 +4,7 @@
   Use, modification and distribution is subject to the BSD 2-clause license.
   See accompanying file LICENSE.txt for its full text.
  */
-    $fromIndex = true;
+    $includedFromIndex = true;
 ?>
 
 <!DOCTYPE html>
