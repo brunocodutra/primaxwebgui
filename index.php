@@ -4,6 +4,7 @@
   Use, modification and distribution is subject to the BSD 2-clause license.
   See accompanying file LICENSE.txt for its full text.
  */
+    session_start();
     $includedFromIndex = true;
 ?>
 
@@ -70,6 +71,19 @@
         <script src="js/vendor/bootstrap.min.js"></script>
         <script src="js/main.js"></script>
         <script type="text/javascript">
+        
+            $.ajaxSetup({
+                error: function(xhr, status, error) {
+                    if(xhr.status == 303)
+                        redirection = "busy.php";
+                    else if(xhr.status == 403)
+                        redirection = "403.php";
+                    else
+                        redirection = "404.php";
+                    
+                    window.location.replace(redirection);
+                }
+            });
         
             function enableControls(flag) {
                 if(flag) {
@@ -156,8 +170,18 @@
             }
             
             $(window).resize(function() {centerElement($("#image"), $("#frame"));});
-            $("#buttonOnOff").click(turnOn);
             
+            $(document).ready(function() {
+            <?php
+                if(file_exists('tmp/.lock') && file_get_contents('tmp/.lock') === session_id()) {
+                    echo 'setOn($("#buttonOnOff"));';
+                    echo 'enableControls('.($_SESSION['busy'] == false).');';
+                } else {
+                    echo 'setOff($("#buttonOnOff"));';
+                    echo 'enableControls(false)';
+                }
+            ?>
+            });
         </script>
     </body>
 </html>

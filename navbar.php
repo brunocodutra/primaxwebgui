@@ -5,13 +5,15 @@
   See accompanying file LICENSE.txt for its full text.
  */
     if(empty($includedFromIndex) || !$includedFromIndex) { 
-        $refering=parse_url($_SERVER['HTTP_REFERER']);
+        $refering = parse_url($_SERVER['HTTP_REFERER']);
         if($refering['host'] != $_SERVER['HTTP_HOST']) {
-            header("location:404.php"); 
-            die();
+            header("HTTP/1.0 404 Not Found");
+            include_once('404.php');  
+            exit();
         }
     }
 ?>
+
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
