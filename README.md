@@ -2,25 +2,25 @@
 
 ## Introduction ##
 
-**primaxwebgui** is a *very* simple web interface for easy scanning documents through a local network using a primax scanner hooked in a headless linux server.
+**primaxwebgui** is a *very* simple web interface for easy scanning of documents in a local network using a primax scanner hooked to a [possibly headless] linux box.
 
 ## Dependencies ##
 
-### Runtime ###
+### Server Side ###
 
-* Unix like operating systems (tested under Archlinux x86_64 and Ubuntu Server 12.04 LTS x86_84)
-* On the server side, **primaxwebgui** requires a working webserver with php support and the primax binaries installed (tested under Apache 2.2 and php 5.4). 
-* On the client side, all is needed is a modern browser with javascrit support.
+* Linux (tested on Archlinux x86\_64 and Ubuntu Server 12.04 LTS x86\_84)
+* The GNU g++ compiler (for setup only)
+* A working copy of [primaxscan](http://primax.sourceforge.net/), the set of drivers for Primax scanners on linux
+* A live webserver with php support (tested on Apache 2.2 and php 5.4)
 
-### Instalation ###
+### Client Side ###
 
-* A working copy of the gnu g++ compiler.
+* Any modern web browser with javascrit support
 
-## Instalation ##
+## Setup ##
 
-* Run INSTALL.sh from within primaxwebgui/ with root privileges
-* Setup the web server to serve primaxwebgui/ as primax/
-* Check the setup by visiting http://yourdomain/primax
+* Run INSTALL.sh from within the root directory of **primaxwebgui** granting root privileges
+* Setup the web server to serve **primaxwebgui**'s root directory
 
 ## License ##
 
