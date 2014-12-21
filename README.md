@@ -1,10 +1,13 @@
-# primaxwebgui - web interface for primax scanners #
+primaxwebgui - web interface for primax scanners
+================================================
 
-## Introduction ##
+Introduction
+------------
 
 **primaxwebgui** is a *very* simple web interface for easy scanning of documents in a local network using a primax scanner hooked to a [possibly headless] linux box.
 
-## Dependencies ##
+Dependencies
+------------
 
 ### Server Side ###
 
@@ -17,11 +20,13 @@
 
 * Any modern web browser with javascrit support
 
-## Setup ##
+Setup
+-----
 
 * Run INSTALL.sh from within the root directory of **primaxwebgui** granting root privileges
 * Setup the web server to serve **primaxwebgui**'s root directory
 
-## License ##
+License
+-------
 
 **primaxwebgui** is distributed under the **BSD 2-clause license**. See accompanying file LICENSE.txt for its full text.
